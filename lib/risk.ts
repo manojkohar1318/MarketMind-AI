@@ -1,0 +1,3 @@
+export type RiskSettings = { capital: number; maxRiskPerTrade: number; dailyLossLimit: number; maxOpenPositions: number };
+export const defaultRiskSettings: RiskSettings = { capital: 500000, maxRiskPerTrade: 0.01, dailyLossLimit: 0.02, maxOpenPositions: 2 };
+export function validatePaperTrade(entry: number, stop: number, quantity: number, settings = defaultRiskSettings) { const risk = Math.abs(entry - stop) * quantity; const allowed = settings.capital * settings.maxRiskPerTrade; return { accepted: risk <= allowed, risk, allowed, reason: risk <= allowed ? "Paper trade is within the configured risk limit." : `Rejected: calculated risk ₹${risk.toFixed(0)} exceeds ₹${allowed.toFixed(0)} per-trade limit.` }; }
