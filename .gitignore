@@ -4,3 +4,5 @@ node_modules
 out
 .env*
 *.log
+__pycache__/
+*.pyc
