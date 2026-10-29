@@ -26,6 +26,18 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## Optional Groww read-only quote adapter
+
+The first Groww milestone is server-side only and never places orders. Start the adapter with Python 3.9+ and an isolated environment:
+
+```bash
+python -m venv services/groww-api/.venv
+services/groww-api/.venv/Scripts/pip install -r services/groww-api/requirements.txt
+services/groww-api/.venv/Scripts/uvicorn services.groww-api.main:app --port 8000
+```
+
+The Next.js UI calls `/api/groww/quote`, which proxies to the adapter. `GROWW_API_KEY` and `GROWW_API_SECRET` are read only by the Python service from the root `.env.local`. The UI remains DEMO DATA until an authenticated Groww quote succeeds. Groww API-key/secret access requires an active subscription and daily approval.
+
 ## Verification
 
 ```bash
